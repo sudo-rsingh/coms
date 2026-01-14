@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebCall - Internet Calling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WebCall</h1>
+            <p class="subtitle">Voice calls over the internet</p>
+        </header>
+
+        <div class="status-bar">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Connecting...</span>
+            </div>
+            <div class="room-info">
+                <span id="roomId"></span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="setup-section" id="setupSection">
+                <h2>Start a Call</h2>
+                <div class="input-group">
+                    <input type="text" id="roomInput" placeholder="Enter room ID (e.g., room123)" autocomplete="off">
+                    <button id="createRoomBtn" class="btn btn-primary">Create Room</button>
+                </div>
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+                <div class="input-group">
+                    <button id="joinRoomBtn" class="btn btn-secondary">Join Room</button>
+                </div>
+                <p class="help-text">Share the room ID with the person you want to call</p>
+            </div>
+
+            <div class="call-section" id="callSection" style="display: none;">
+                <div class="call-status">
+                    <div class="avatar-container">
+                        <div class="avatar" id="remoteAvatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <p id="callStatusText">Waiting for other person...</p>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="muteBtn" class="control-btn" title="Mute">
+                        <svg id="muteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <button id="hangupBtn" class="control-btn hangup" title="Hang up">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.68-1.36-2.66-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"></path>
+                        </svg>
+                    </button>
+                    <button id="speakerBtn" class="control-btn" title="Speaker">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="room-share">
+                    <p>Room ID: <strong id="currentRoomId"></strong></p>
+                    <button id="copyRoomBtn" class="btn btn-small">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <audio id="remoteAudio" autoplay></audio>
+        <audio id="localAudio" muted></audio>
+    </div>
+
+    <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
